@@ -126,7 +126,7 @@ function smtping_output($vars)
                             continue;
                         }
                         $st = isset($row['status']) ? (string)$row['status'] : 'unknown';
-                        $band = Client::band($st);
+                        $band = Client::bandOf($row);
                         Store::set($email, $st, $band);
                         $counts[$band]++;
                     }

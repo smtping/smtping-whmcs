@@ -16,7 +16,7 @@ class Client
     const BULK_MAX = 100000;
 
     const SAFE = ['valid', 'alias'];
-    const AVOID = ['invalid', 'spamtrap', 'disposable', 'blacklisted', 'complainer', 'spambot', 'inbox_full'];
+    const AVOID = ['invalid', 'spamtrap', 'disposable', 'blacklisted', 'complainer', 'spambot', 'inbox_full', 'no_reply'];
 
     private $apiKey;
     private $timeout;
@@ -38,11 +38,18 @@ class Client
         return 'judgement';
     }
 
+    /** The band decided by the API, or derived from the status when the row has none. */
+    public static function bandOf(array $row)
+    {
+        $band = isset($row['band']) ? $row['band'] : null;
+        return in_array($band, ['safe', 'avoid', 'judgement'], true) ? $band : self::band(isset($row['status']) ? (string)$row['status'] : null);
+    }
+
     public function verify($email)
     {
         $r = $this->request('POST', '/verify/single', ['email' => $email], 1);
         $status = (string)(isset($r['status']) ? $r['status'] : 'unknown');
-        return ['status' => $status, 'band' => self::band($status)];
+        return ['status' => $status, 'band' => self::bandOf($r)];
     }
 
     public function createBulk(array $emails)
