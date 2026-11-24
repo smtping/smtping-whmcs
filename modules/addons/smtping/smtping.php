@@ -24,7 +24,7 @@ function smtping_config()
         'description' => 'Block invalid, spamtrap, disposable and other risky email addresses at checkout and registration, and verify your existing clients in bulk.',
         'author'      => 'SMTPing',
         'language'    => 'english',
-        'version'     => '1.0.0',
+        'version'     => '1.0.1',
         'fields'      => [
             'api_key' => ['FriendlyName' => 'API key', 'Type' => 'password', 'Size' => '60', 'Description' => 'Create a key in the <a href="https://app.smtping.com" target="_blank" rel="noopener">SMTPing dashboard</a>, under API keys. 25 free credits per day.'],
             'check_checkout' => ['FriendlyName' => 'Check new clients at checkout', 'Type' => 'yesno', 'Default' => 'yes'],

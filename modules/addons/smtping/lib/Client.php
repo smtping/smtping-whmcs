@@ -12,7 +12,7 @@ if (!defined('WHMCS')) {
 class Client
 {
     const BASE_URL = 'https://api.smtping.com/api/v1';
-    const USER_AGENT = 'smtping-whmcs/1.0.0';
+    const USER_AGENT = 'smtping-whmcs/1.0.1';
     const BULK_MAX = 100000;
 
     const SAFE = ['valid', 'alias'];
